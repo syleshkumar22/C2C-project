@@ -5,7 +5,7 @@ from unittest.mock import MagicMock, patch
 import main
 
 class TestBankSystem(unittest.TestCase):
-
+#I am not sure what I am doing so this may not work
     def setUp(self):
         self.connection = MagicMock()
         self.cursor = MagicMock()

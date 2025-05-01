@@ -7,8 +7,7 @@ def connect_db():
         host="localhost",
         user="root",
         password="38@Action",
-        database="example"
-    )
+        database="example")
 
 def generate_account_number():
     return random.randint(1000000000, 9999999999)
@@ -17,7 +16,6 @@ def login(cursor):
     name = input("Enter your name: ")
     account = input("Enter your account number: ")
     password = input("Enter your password: ")
-
     cursor.execute("SELECT * FROM users WHERE name = %s AND account = %s AND password = %s", (name, account, password))
     user = cursor.fetchone()
 
@@ -40,6 +38,8 @@ def create_account(cursor):
     cursor.execute("INSERT INTO users (name, account, password, money) VALUES (%s, %s, %s, %s)", (name, account_num, password, 0.0))
     connection.commit()
 
+
+    
     cursor.execute("SELECT * FROM users WHERE account = %s", (account_num,))
     user = cursor.fetchone()
     print(f"Account created successfully!\nName: {name}\nAccount Number: {account_num}")
@@ -98,6 +98,7 @@ def close_account(cursor, connection, user):
 def main():
     global connection
     connection = connect_db()
+    
     cursor = connection.cursor()
 
     user = login(cursor)
@@ -123,6 +124,7 @@ def main():
             print("Invalid choice. Please select 1-5.")
 
     cursor.close()
+    
     connection.close()
 
 if __name__ == "__main__":
